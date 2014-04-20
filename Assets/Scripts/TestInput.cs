@@ -8,21 +8,16 @@ public enum SoundPosition { front, back, left, right, up, down };
 public class TestInput : MonoBehaviour
 {
 
-    int totalGuessCount = 0;
+    public Transform rotationTrans;
 
-    public Transform[] spawnPositions; //ENTER ACCORDING TO ENUM
+    private Quaternion rotationTarget;
+
+    int totalGuessCount = 0;
 
     int[] occuredGuessCount;
     int[] correctGuesses;
 
     private SoundPosition currentSoundPos;
-
-    Vector3 originalPos;
-    Vector3 randOffsetTarget;
-    float offsetResetDist = 0.05f;
-    public float maxOffsetDist;
-    public float offsetMoveSpeed;
-    float currentTime;
 
     // Use this for initialization
     void Start()
@@ -31,23 +26,11 @@ public class TestInput : MonoBehaviour
         correctGuesses = new int[6];
 
         RandomizeSoundPosition();
-        NewOffsetTarget();
-
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, randOffsetTarget, Time.deltaTime * offsetMoveSpeed);
-        if ((transform.position - randOffsetTarget).magnitude < offsetResetDist)
-        {
-            randOffsetTarget = originalPos + new Vector3(Random.Range(-maxOffsetDist, maxOffsetDist), Random.Range(-maxOffsetDist, maxOffsetDist), Random.Range(-maxOffsetDist, maxOffsetDist));
-        }
-    }
-
-    void NewOffsetTarget()
-    {
-        originalPos = transform.position;
-        randOffsetTarget = originalPos + new Vector3(Random.Range(-maxOffsetDist, maxOffsetDist), Random.Range(-maxOffsetDist, maxOffsetDist), Random.Range(-maxOffsetDist, maxOffsetDist));
+        RotateTowardsTarget();
     }
 
     // Update is called once per frame
@@ -97,13 +80,41 @@ public class TestInput : MonoBehaviour
             correctGuesses[(int)currentSoundPos]++;
         }
         RandomizeSoundPosition();
-        NewOffsetTarget();
     }
 
     private void RandomizeSoundPosition()
     {
-        currentSoundPos = (SoundPosition)Random.Range(0, 6);
-        transform.position = spawnPositions[(int)currentSoundPos].position;
+        int newPos = (int)currentSoundPos;
+        while (newPos == (int)currentSoundPos)
+        {
+            newPos = Random.Range(0, 6);
+        }
+
+        currentSoundPos = (SoundPosition)newPos;
+
+        switch ((int)currentSoundPos)
+        {
+            case 0:
+                rotationTarget = Quaternion.Euler(0, 0, 0);
+                break;
+            case 1:
+                rotationTarget = Quaternion.Euler(0, 180, 0);
+                break;
+            case 2:
+                rotationTarget = Quaternion.Euler(0, -90, 0);
+                break;
+            case 3:
+                rotationTarget = Quaternion.Euler(0, 90, 0);
+                break;
+            case 4:
+                rotationTarget = Quaternion.Euler(-90, 0, 0);
+                break;
+            case 5:
+                rotationTarget = Quaternion.Euler(90, 0, 0);
+                break;
+
+        }
+        //transform.position = spawnPositions[(int)currentSoundPos].position;
     }
 
     private void SaveResults()
@@ -137,5 +148,11 @@ public class TestInput : MonoBehaviour
         var stream = new FileStream(Application.dataPath + "/../TestResults" + "/Result" + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + ".xml", FileMode.Create);
         serializer.Serialize(stream, rs);
         stream.Close();
+    }
+
+    private void RotateTowardsTarget()
+    {
+        rotationTrans.rotation = Quaternion.RotateTowards(rotationTrans.rotation, rotationTarget, Time.deltaTime*70);
+        transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
     }
 }
