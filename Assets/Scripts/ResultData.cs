@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
+[XmlRoot("Guess list")]
 public class ResultData {
 
-    [XmlArray("GuessAttempts")]
-    public int[] guessAttempts = new int[6];
-
-    [XmlArray("CorrectGuesses")]
-    public int[] correctGuesses = new int[6];
+    [XmlArray("Guess")]
+    public List<Result> angleOffsets = new List<Result>();
 
 }

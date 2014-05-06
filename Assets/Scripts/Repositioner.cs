@@ -23,13 +23,13 @@ public class Repositioner : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, pos2.position, Time.deltaTime * movementSpeed);
             if ((transform.position - pos2.position).magnitude < changeOffset) towardsFirst = !towardsFirst;
         }
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            Application.LoadLevel(1);
+        }
     }
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(0, 0, 100, 100), "Start Test"))
-        {
-            Application.LoadLevel(1);
-        }
+        GUI.Label(new Rect(0, 0, 100, 100), "Press Esc to begin test");
     }
 }
