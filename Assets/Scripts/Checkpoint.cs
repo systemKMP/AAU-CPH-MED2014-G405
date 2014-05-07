@@ -7,10 +7,16 @@ public class Checkpoint : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") //looks for objects tagged as "Player"
+        if (other.tag == "SpawnPoint") //looks for objects tagged as "Player"
         {
-            spawnPoint.position = new Vector3(transform.position.x, spawnPoint.position.y, transform.position.z); //Sets the new spawn point to whichever checkpoint object last tagged by the player
-            //Destroy(gameObject);
+            spawnPoint = other.transform;
         }
     }
+
+    public void Respawn()
+    {
+        transform.position = spawnPoint.position;
+        transform.rotation = spawnPoint.rotation;
+    }
+
 }
