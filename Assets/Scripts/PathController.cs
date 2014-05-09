@@ -12,7 +12,7 @@ public class PathController : MonoBehaviour {
 
 	private float targetChangeDistance = 0.5f;
 
-	Vector3 velocity;
+	Vector3 movementDirection;
 
 	// Use this for initialization
 	void Start () 
@@ -36,11 +36,11 @@ public class PathController : MonoBehaviour {
 			}
 			Vector3 target = patrolPoints[currentPoint].position - transform.position;
 
-			velocity = Vector3.MoveTowards(velocity, target.normalized,Time.deltaTime*4.0f);
+			movementDirection = Vector3.MoveTowards(movementDirection, target.normalized,Time.deltaTime*4.0f);
 
-			transform.position += velocity * Time.deltaTime * moveSpeed;
+			transform.position += movementDirection * Time.deltaTime * moveSpeed;
 
-			transform.LookAt(velocity+transform.position);
+			transform.LookAt(movementDirection+transform.position);
 		}
 		else 
 		{
@@ -58,14 +58,15 @@ public class PathController : MonoBehaviour {
 					if(currentPoint <= 0)
 						atEnd = false;
 				}
+
 			}
 			Vector3 target = patrolPoints[currentPoint].position - transform.position;
 			
-			velocity = Vector3.MoveTowards(velocity, target.normalized,Time.deltaTime*4.0f);
+			movementDirection = Quaternion.RotateTowards(Quaternion.LookRotation(movementDirection), Quaternion.LookRotation(target),Time.deltaTime*400.0f) * Vector3.forward;
 			
-			transform.position += velocity * Time.deltaTime * moveSpeed;
+			transform.position += movementDirection * Time.deltaTime * moveSpeed;
 			
-			transform.LookAt(velocity+transform.position);
+			transform.LookAt(movementDirection+transform.position);
 		}
 	}
 }
