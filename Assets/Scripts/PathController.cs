@@ -53,7 +53,11 @@ public class PathController : MonoBehaviour {
 						atEnd = true;
 				}
 				if(atEnd)
+				{
 					currentPoint--;
+					if(currentPoint <= 0)
+						atEnd = false;
+				}
 			}
 			Vector3 target = patrolPoints[currentPoint].position - transform.position;
 			
