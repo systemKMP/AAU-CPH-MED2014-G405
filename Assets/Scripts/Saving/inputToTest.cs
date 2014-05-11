@@ -8,7 +8,9 @@ using System.IO;
 public class inputToTest : MonoBehaviour {
 
     LinkedList<testResult> roomInformation;
-    testResult resultInformation = new testResult(0.0f, 0);
+    testResult resultInformation = new testResult();
+    testResultData savingResult = new testResultData();
+    public float roomTimeUsed = 0;
 
 	void Start () 
     {
@@ -22,7 +24,6 @@ public class inputToTest : MonoBehaviour {
 
     void SaveResult()
     {
-        testResultData savingResult = new testResultData();
         savingResult.timeForNextRoom = roomInformation.ToList();
 
         System.IO.Directory.CreateDirectory(Application.dataPath + "/../RealTestResults/");
@@ -59,8 +60,10 @@ public class inputToTest : MonoBehaviour {
 
     void RoomFinished()
     {
+        roomTimeUsed = resultInformation.currRoomTimer;
+        savingResult.timeForNextRoom = roomInformation.ToList();
         resultInformation.currRoomTimer = 0.0f;
-        //uncertain how to save just the time
+        resultInformation.deathCounter = 0;
     }
 
     void TestStart()
