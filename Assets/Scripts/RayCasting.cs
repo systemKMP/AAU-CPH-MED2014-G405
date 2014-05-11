@@ -9,7 +9,7 @@ public class RayCasting : MonoBehaviour {
 	float rayCastInterval = 0.2f;
 	float rayCastTimer;
 
-	int raycastTargets = (1<<8) | (1<<9); //layer nr 8 = enemy, layer nr 9 = wall
+	int raycastTargets = (1<<8) | (1<<9 | 1<<10); //layer nr 8 = door, layer nr 9 = wall, 10 = player
 
 	// Use this for initialization
 	void Start () {
@@ -27,9 +27,9 @@ public class RayCasting : MonoBehaviour {
 			rayCastTimer = rayCastInterval;
 			if(Physics.Raycast(transform.position, direction.normalized, out hit, 200, raycastTargets)) 
 			{
-				if(hit.transform.gameObject.layer == 8)
+				if(hit.transform.gameObject.layer == 10)
 				{
-					Destroy(hit.transform.gameObject);
+                    hit.transform.gameObject.GetComponent<PlayerController>().Kill();
 				}
 				Debug.DrawRay(transform.position, direction, Color.red); //show the raycasting at full length between the player and the object(enemy)
 				Debug.Log(hit.transform.gameObject.layer);
