@@ -7,13 +7,12 @@ using System.IO;
 
 public class inputToTest : MonoBehaviour {
 
-    LinkedList<testResult> roomTimeUsed;
-    LinkedList<testResult> death;
+    LinkedList<testResult> roomInformation;
+    testResult resultInformation = new testResult(0.0f, 0);
 
 	void Start () 
     {
-	    roomTimeUsed = new LinkedList<testResult>();
-        death = new LinkedList<testResult>();
+	    roomInformation = new LinkedList<testResult>();
 	}
 
 	void Update () 
@@ -21,12 +20,10 @@ public class inputToTest : MonoBehaviour {
 	
 	}
 
-    void saveResult()
+    void SaveResult()
     {
-        testResultData timeUsed = new testResultData();
-        timeUsed.timeForNextRoom = roomTimeUsed.ToList();
-        testResultData roomDeath = new testResultData();
-        roomDeath.deathCount = death.ToList();
+        testResultData savingResult = new testResultData();
+        savingResult.timeForNextRoom = roomInformation.ToList();
 
         System.IO.Directory.CreateDirectory(Application.dataPath + "/../RealTestResults/");
         var serializer = new XmlSerializer(typeof(ResultData));
@@ -51,28 +48,29 @@ public class inputToTest : MonoBehaviour {
         time += System.DateTime.Now.Second.ToString();
 
         var stream = new FileStream(Application.dataPath + "/../TestResults" + "/Result" + time + ".xml", FileMode.Create);
-        serializer.Serialize(stream, timeUsed);
-        serializer.Serialize(stream, roomDeath);
+        serializer.Serialize(stream, savingResult);
         stream.Close();
     }
 
-    void failedCurrentRoom()
-    { 
-        
+    void FailedCurrentRoom()
+    {
+        resultInformation.deathCounter++;
     }
 
-    void roomFinished()
-    { 
-        
+    void RoomFinished()
+    {
+        resultInformation.currRoomTimer = 0.0f;
+        //uncertain how to save just the time
     }
 
-    void testStart()
-    { 
-        
+    void TestStart()
+    {
+        resultInformation.currRoomTimer += Time.deltaTime;
+        resultInformation.deathCounter = 0;
     }
 
-    void testFinished()
-    { 
-        
+    void TestFinished()
+    {
+        SaveResult();
     }
 }
