@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ThirdTest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Individual_x0020_guess_x0020_list>
+    <TTSGU>
+      <originLocation>0</originLocation>
+      <movementAmount>0</movementAmount>
+      <guessAmount>0</guessAmount>
+    </TTSGU>
+    <TTSGU>
+      <originLocation>270</originLocation>
+      <movementAmount>-40</movementAmount>
+      <guessAmount>-40</guessAmount>
+    </TTSGU>
+    <TTSGU>
+      <originLocation>330</originLocation>
+      <movementAmount>-20</movementAmount>
+      <guessAmount>-20</guessAmount>
+    </TTSGU>
+    <TTSGU>
+      <originLocation>300</originLocation>
+      <movementAmount>0</movementAmount>
+      <guessAmount>0</guessAmount>
+    </TTSGU>
+    <TTSGU>
+      <originLocation>300</originLocation>
+      <movementAmount>20</movementAmount>
+      <guessAmount>-20</guessAmount>
+    </TTSGU>
+    <TTSGU>
+      <originLocation>120</originLocation>
+      <movementAmount>0</movementAmount>
+      <guessAmount>0</guessAmount>
+    </TTSGU>
+    <TTSGU>
+      <originLocation>270</originLocation>
+      <movementAmount>40</movementAmount>
+      <guessAmount>0</guessAmount>
+    </TTSGU>
+    <TTSGU>
+      <originLocation>60</originLocation>
+      <movementAmount>-40</movementAmount>
+      <guessAmount>20</guessAmount>
+    </TTSGU>
+  </Individual_x0020_guess_x0020_list>
+</ThirdTest>

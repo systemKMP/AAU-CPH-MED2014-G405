@@ -73,4 +73,9 @@ public class DoorController : MonoBehaviour
     {
         throw new System.NotImplementedException();
     }
+
+    public void InstantClose()
+    {
+        throw new System.NotImplementedException();
+    }
 }
