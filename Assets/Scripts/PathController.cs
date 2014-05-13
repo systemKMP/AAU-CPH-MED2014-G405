@@ -17,7 +17,10 @@ public class PathController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		transform.position = patrolPoints[0].position;
+        if (patrolPoints[currentPoint] != null)
+            transform.position = patrolPoints[0].position;
+        else
+            Debug.Log("stand still");
 		currentPoint = 0;
 	}
 	
@@ -51,7 +54,7 @@ public class PathController : MonoBehaviour {
 		}
 		else 
 		{
-            if (patrolPoints[currentPoint] == null)
+            if (patrolPoints[currentPoint] == null || patrolPoints.Length == 0)
             {
                 transform.position = transform.position;
             }
