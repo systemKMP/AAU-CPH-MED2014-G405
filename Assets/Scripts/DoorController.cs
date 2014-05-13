@@ -12,7 +12,7 @@ public class DoorController : MonoBehaviour
 
     public Transform otherPos;
 
-    private float stateTransitionDist = 0.05f;
+    private float stateTransitionDist = 0.01f;
 
     private Vector3 closedPos;
     private Vector3 openPos;
@@ -39,7 +39,6 @@ public class DoorController : MonoBehaviour
     {
         if (state == DoorState.Opening)
         {
-            Debug.Log(state);
             transform.position = Vector3.MoveTowards(transform.position, openPos, Time.deltaTime * 2.0f);
             if ((transform.position - openPos).magnitude < stateTransitionDist)
             {

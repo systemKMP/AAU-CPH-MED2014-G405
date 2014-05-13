@@ -2,38 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PathController : MonoBehaviour {
+public class PathController : MonoBehaviour
+{
 
-	public Transform[] patrolPoints;
-	private int currentPoint;
-	public float moveSpeed;
-	public bool moveInCircle = true;
-	public bool atEnd = false;
+    public Transform[] patrolPoints;
+    private int currentPoint;
+    public float moveSpeed;
+    public bool moveInCircle = true;
+    public bool atEnd = false;
 
-	private float targetChangeDistance = 0.5f;
+    private float targetChangeDistance = 0.5f;
 
-	Vector3 movementDirection;
+    Vector3 movementDirection;
 
-	// Use this for initialization
-	void Start () 
-	{
-        if (patrolPoints[currentPoint] != null)
+    // Use this for initialization
+    void Start()
+    {
+        if (patrolPoints.Length > 0 && patrolPoints != null){
             transform.position = patrolPoints[0].position;
-        else
-            Debug.Log("stand still");
-		currentPoint = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if(moveInCircle)
-		{
-            if (patrolPoints[currentPoint] == null)
-            {
-                transform.position = transform.position;
-            }
-            else
+        }
+
+        currentPoint = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (patrolPoints.Length > 0 && patrolPoints != null)
+        {
+            if (moveInCircle)
             {
                 if ((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance)
                 {
@@ -51,39 +48,39 @@ public class PathController : MonoBehaviour {
 
                 transform.LookAt(movementDirection + transform.position);
             }
-		}
-		else 
-		{
-            if (patrolPoints[currentPoint] == null || patrolPoints.Length == 0)
-            {
-                transform.position = transform.position;
-            }
             else
             {
-                if ((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance && currentPoint != null)
+                if (patrolPoints.Length == 0 || patrolPoints[currentPoint] == null)
                 {
-                    if (!atEnd)
-                    {
-                        currentPoint++;
-                        if (currentPoint >= patrolPoints.Length)
-                            atEnd = true;
-                    }
-                    if (atEnd)
-                    {
-                        currentPoint--;
-                        if (currentPoint <= 0)
-                            atEnd = false;
-                    }
+                    transform.position = transform.position;
                 }
+                else
+                {
+                    if ((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance && currentPoint != null)
+                    {
+                        if (!atEnd)
+                        {
+                            currentPoint++;
+                            if (currentPoint >= patrolPoints.Length)
+                                atEnd = true;
+                        }
+                        if (atEnd)
+                        {
+                            currentPoint--;
+                            if (currentPoint <= 0)
+                                atEnd = false;
+                        }
+                    }
 
-                Vector3 target = patrolPoints[currentPoint].position - transform.position;
+                    Vector3 target = patrolPoints[currentPoint].position - transform.position;
 
-                movementDirection = Quaternion.RotateTowards(Quaternion.LookRotation(movementDirection), Quaternion.LookRotation(target), Time.deltaTime * 400.0f) * Vector3.forward;
+                    movementDirection = Quaternion.RotateTowards(Quaternion.LookRotation(movementDirection), Quaternion.LookRotation(target), Time.deltaTime * 400.0f) * Vector3.forward;
 
-                transform.position += movementDirection * Time.deltaTime * moveSpeed;
+                    transform.position += movementDirection * Time.deltaTime * moveSpeed;
 
-                transform.LookAt(movementDirection + transform.position);
+                    transform.LookAt(movementDirection + transform.position);
+                }
             }
-		}
-	}
+        }
+    }
 }

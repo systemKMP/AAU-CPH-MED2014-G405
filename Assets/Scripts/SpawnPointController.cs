@@ -9,16 +9,18 @@ public class SpawnPointController : MonoBehaviour {
     public GameObject[] nextStageEnemies;
     public GameObject[] previousStageEnemies;
 
+    public Elavator elavator;
+
     private void HandleEnemies()
     {
+        foreach (GameObject enemy in previousStageEnemies)
+        {
+            Destroy(enemy);
+            //enemy.SetActive(false);
+        }
         foreach (GameObject enemy in nextStageEnemies)
         {
             enemy.SetActive(true);
-        }
-
-        foreach (GameObject enemy in previousStageEnemies)
-        {
-            enemy.SetActive(false);
         }
     }
     public void SpawnPointEntered()
@@ -28,6 +30,11 @@ public class SpawnPointController : MonoBehaviour {
             door.PermanentClose();
         }
         HandleEnemies();
+
+        if (elavator != null)
+        {
+            elavator.ActivateLift();
+        }
     }
 
     public void RefreshDoorState()

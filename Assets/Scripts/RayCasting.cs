@@ -36,7 +36,6 @@ public class RayCasting : MonoBehaviour {
                         hit.transform.gameObject.GetComponent<PlayerController>().Kill();
                     }
                     Debug.DrawRay(transform.position, direction, Color.red); //show the raycasting at full length between the player and the object(enemy)
-                    Debug.Log(hit.transform.gameObject.layer);
                 }
             }
         }
