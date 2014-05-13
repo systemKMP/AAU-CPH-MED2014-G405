@@ -26,47 +26,62 @@ public class PathController : MonoBehaviour {
 	{
 		if(moveInCircle)
 		{
-			if((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance)
-			{
-				currentPoint++;
-			}
-			if(currentPoint >= patrolPoints.Length)
-			{
-					currentPoint = 0;
-			}
-			Vector3 target = patrolPoints[currentPoint].position - transform.position;
+            if (patrolPoints[currentPoint] == null)
+            {
+                transform.position = transform.position;
+            }
+            else
+            {
+                if ((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance)
+                {
+                    currentPoint++;
+                }
+                if (currentPoint >= patrolPoints.Length)
+                {
+                    currentPoint = 0;
+                }
+                Vector3 target = patrolPoints[currentPoint].position - transform.position;
 
-			movementDirection = Vector3.MoveTowards(movementDirection, target.normalized,Time.deltaTime*4.0f);
+                movementDirection = Vector3.MoveTowards(movementDirection, target.normalized, Time.deltaTime * 4.0f);
 
-			transform.position += movementDirection * Time.deltaTime * moveSpeed;
+                transform.position += movementDirection * Time.deltaTime * moveSpeed;
 
-			transform.LookAt(movementDirection+transform.position);
+                transform.LookAt(movementDirection + transform.position);
+            }
 		}
 		else 
 		{
-			if((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance)
-			{
-				if(!atEnd)
-				{
-					currentPoint++;
-					if(currentPoint >= patrolPoints.Length)
-						atEnd = true;
-				}
-				if(atEnd)
-				{
-					currentPoint--;
-					if(currentPoint <= 0)
-						atEnd = false;
-				}
+            if (patrolPoints[currentPoint] == null)
+            {
+                transform.position = transform.position;
+            }
+            else
+            {
+                if ((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance && currentPoint != null)
+                {
+                    if (!atEnd)
+                    {
+                        currentPoint++;
+                        if (currentPoint >= patrolPoints.Length)
+                            atEnd = true;
+                    }
+                    if (atEnd)
+                    {
+                        currentPoint--;
+                        if (currentPoint <= 0)
+                            atEnd = false;
+                    }
+                }
 
-			}
-			Vector3 target = patrolPoints[currentPoint].position - transform.position;
-			
-			movementDirection = Quaternion.RotateTowards(Quaternion.LookRotation(movementDirection), Quaternion.LookRotation(target),Time.deltaTime*400.0f) * Vector3.forward;
-			
-			transform.position += movementDirection * Time.deltaTime * moveSpeed;
-			
-			transform.LookAt(movementDirection+transform.position);
+                Vector3 target = patrolPoints[currentPoint].position - transform.position;
+
+                movementDirection = Quaternion.RotateTowards(Quaternion.LookRotation(movementDirection), Quaternion.LookRotation(target), Time.deltaTime * 400.0f) * Vector3.forward;
+
+                transform.position += movementDirection * Time.deltaTime * moveSpeed;
+
+                transform.LookAt(movementDirection + transform.position);
+            }
 		}
+	}
 	}
 }
