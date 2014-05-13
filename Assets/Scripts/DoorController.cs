@@ -18,6 +18,8 @@ public class DoorController : MonoBehaviour
     private Vector3 openPos;
     private bool permaClosed;
 
+    public DoorController connectedDoor;
+
     void Start()
     {
         permaClosed = false;
@@ -56,26 +58,47 @@ public class DoorController : MonoBehaviour
 
     }
 
-    public void OpenDoor()
+    public void ActivateDoor()
     {
-
-        if (state == DoorState.Closed || state == DoorState.Closing)
+        if (!permaClosed)
         {
-            state = DoorState.Opening;
+            if (state == DoorState.Closed || state == DoorState.Closing)
+            {
+                state = DoorState.Opening;
+            }
+            else if ((state == DoorState.Open || state == DoorState.Opening) && manualClosing)
+            {
+                state = DoorState.Closing;
+            }
         }
-        else if ((state == DoorState.Open || state == DoorState.Opening) && manualClosing)
+        if (connectedDoor != null)
         {
-            state = DoorState.Closing;
+            if (connectedDoor.state != state)
+            {
+                connectedDoor.ActivateDoor();
+            }
         }
     }
 
     public void PermanentClose()
     {
-        throw new System.NotImplementedException();
+        permaClosed = true;
+        state = DoorState.Closing;
+        if (connectedDoor != null)
+        {
+            connectedDoor.permaClosed = true;
+            connectedDoor.state = DoorState.Closing;
+        }
     }
 
     public void InstantClose()
     {
-        throw new System.NotImplementedException();
+        transform.position = closedPos;
+        state = DoorState.Closed;
+        if (connectedDoor != null)
+        {
+            connectedDoor.transform.position = connectedDoor.closedPos;
+            connectedDoor.state = DoorState.Closed;
+        }
     }
 }

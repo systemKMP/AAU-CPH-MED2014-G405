@@ -6,23 +6,32 @@ public class SpawnPointController : MonoBehaviour {
     public DoorController[] nextDoors;
     public DoorController[] previousDoors;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public GameObject[] nextStageEnemies;
+    public GameObject[] previousStageEnemies;
 
+    private void HandleEnemies()
+    {
+        foreach (GameObject enemy in nextStageEnemies)
+        {
+            enemy.SetActive(true);
+        }
+
+        foreach (GameObject enemy in previousStageEnemies)
+        {
+            enemy.SetActive(false);
+        }
+    }
     public void SpawnPointEntered()
     {
         foreach (DoorController door in previousDoors)
         {
             door.PermanentClose();
         }
+        HandleEnemies();
+    }
 
+    public void RefreshDoorState()
+    {
         foreach (DoorController door in nextDoors)
         {
             door.InstantClose();

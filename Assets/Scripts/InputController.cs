@@ -46,7 +46,7 @@ public class InputController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                dc.OpenDoor();
+                dc.ActivateDoor();
             }
         }
         else
