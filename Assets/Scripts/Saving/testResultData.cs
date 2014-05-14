@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-[XmlRoot("Total Result")]
-public class testResultData
+[XmlRoot("Total Results")]
+public class TestResultData
 {
-    [XmlArray("Time used to reach next room")]
-    public List<testResult> timeForNextRoom = new List<testResult>();
+    [XmlArray("Data List")]
+    public List<TestResult> testDataList = new List<TestResult>();
+
+    [XmlAttribute("HRTF test?")]
+    public bool hrtfTest;
 }

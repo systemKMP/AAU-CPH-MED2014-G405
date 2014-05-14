@@ -16,7 +16,8 @@ public class DoorController : MonoBehaviour
 
     private Vector3 closedPos;
     private Vector3 openPos;
-    private bool permaClosed;
+
+    public bool permaClosed;
 
     public DoorController connectedDoor;
 

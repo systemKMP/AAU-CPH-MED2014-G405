@@ -25,10 +25,10 @@ public class InputController : MonoBehaviour
     void Update()
     {
         RaycastHit ray;
-        if (Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out ray, 1.5f, doorTag))
+        if (Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out ray, 2.0f, doorTag))
         {
             DoorController dc = ray.transform.gameObject.GetComponent<DoorController>();
-            if (dc.state == DoorState.Closed || dc.state == DoorState.Closing)
+            if ((dc.state == DoorState.Closed || dc.state == DoorState.Closing) && !dc.permaClosed)
             {
                 doorTooltipText = "PRESS E TO OPEN";
                 showDoorToolpit = true;
@@ -36,6 +36,11 @@ public class InputController : MonoBehaviour
             else if (dc.manualClosing)
             {
                 doorTooltipText = "PRESS E TO CLOSE";
+                showDoorToolpit = true;
+            }
+            else if (dc.permaClosed && dc.state == DoorState.Closed)
+            {
+                doorTooltipText = "    LOCKED";
                 showDoorToolpit = true;
             }
             else

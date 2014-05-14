@@ -11,12 +11,18 @@ public class SpawnPointController : MonoBehaviour {
 
     public Elavator elavator;
 
+    private bool triggered = false;
+
+    public bool testTrigger = false;
+
     private void HandleEnemies()
     {
         foreach (GameObject enemy in previousStageEnemies)
         {
-            Destroy(enemy);
-            //enemy.SetActive(false);
+            if (enemy != null)
+            {
+                Destroy(enemy);
+            }
         }
         foreach (GameObject enemy in nextStageEnemies)
         {
@@ -25,6 +31,12 @@ public class SpawnPointController : MonoBehaviour {
     }
     public void SpawnPointEntered()
     {
+        if (testTrigger && !triggered)
+        {
+            TestResultManager.instance.RoomFinished();
+            triggered = true;
+        }
+
         foreach (DoorController door in previousDoors)
         {
             door.PermanentClose();
