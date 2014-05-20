@@ -48,7 +48,8 @@ public class RayCasting : MonoBehaviour {
 
                             if (GameManager.instance.hrtfMode)
                             {
-                                gameObject.GetComponent<TBE_3DCore.TBE_Source>().PlayOneShot(killSound);
+                                TBE_3DCore.TBE_Source tbes = gameObject.GetComponent<TBE_3DCore.TBE_Source>() as TBE_3DCore.TBE_Source;
+                                tbes.PlayOneShot(killSound);
                             }
                             else
                             {
