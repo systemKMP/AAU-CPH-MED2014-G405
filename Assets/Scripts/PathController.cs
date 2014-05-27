@@ -25,7 +25,6 @@ public class PathController : MonoBehaviour
         currentPoint = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (patrolPoints.Length > 0 && patrolPoints != null)
@@ -58,17 +57,17 @@ public class PathController : MonoBehaviour
                 {
                     if ((transform.position - patrolPoints[currentPoint].position).magnitude < targetChangeDistance && currentPoint != null)
                     {
-                        if (!atEnd)
+                        if (!atEnd) /*This bool check if the drone has reached the last element in the array of waypoints*/
                         {
                             currentPoint++;
                             if (currentPoint >= patrolPoints.Length)
-                                atEnd = true;
+                                atEnd = true; /*Once it reaches the last element tell the drone that has reached the end*/
                         }
                         if (atEnd)
                         {
-                            currentPoint--;
+                            currentPoint--; /*Makes the drone go backwards, the same path as it walked before, just opposite*/
                             if (currentPoint <= 0)
-                                atEnd = false;
+                                atEnd = false; 
                         }
                     }
 
