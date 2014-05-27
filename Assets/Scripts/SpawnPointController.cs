@@ -5,14 +5,11 @@ public class SpawnPointController : MonoBehaviour {
 
     public DoorController[] nextDoors;
     public DoorController[] previousDoors;
-
     public GameObject[] nextStageEnemies;
     public GameObject[] previousStageEnemies;
-
     public Elavator elavator;
 
     private bool triggered = false;
-
     public bool testTrigger = false;
 
     private void HandleEnemies()
@@ -42,7 +39,6 @@ public class SpawnPointController : MonoBehaviour {
             door.PermanentClose();
         }
         HandleEnemies();
-
         if (elavator != null)
         {
             elavator.ActivateLift();
