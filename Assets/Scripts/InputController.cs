@@ -47,12 +47,10 @@ public class InputController : MonoBehaviour
             {
                 showDoorToolpit = false;
             }
-            
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                dc.ActivateDoor();
-            }
+    if (Input.GetKeyDown(KeyCode.E))
+    {
+        dc.ActivateDoor();
+    }
         }
         else
         {
