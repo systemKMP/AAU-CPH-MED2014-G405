@@ -2,30 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Controls the enemies movement
+/// </summary>
 public class PathController : MonoBehaviour
 {
-
     public Transform[] patrolPoints;
     private int currentPoint;
-    public float moveSpeed;
+    public float movementSpeed;
     public bool moveInCircle = true;
     public bool atEnd = false;
-
     private float targetChangeDistance = 0.5f;
-
     Vector3 movementDirection;
 
-    // Use this for initialization
     void Start()
     {
         if (patrolPoints.Length > 0 && patrolPoints != null){
             transform.position = patrolPoints[0].position;
         }
-
         currentPoint = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (patrolPoints.Length > 0 && patrolPoints != null)
@@ -40,12 +37,10 @@ public class PathController : MonoBehaviour
                 {
                     currentPoint = 0;
                 }
+
                 Vector3 target = patrolPoints[currentPoint].position - transform.position;
-
                 movementDirection = Vector3.MoveTowards(movementDirection, target.normalized, Time.deltaTime * 4.0f);
-
-                transform.position += movementDirection * Time.deltaTime * moveSpeed;
-
+                transform.position += movementDirection * Time.deltaTime * movementSpeed;
                 transform.LookAt(movementDirection + transform.position);
             }
             else
@@ -71,13 +66,9 @@ public class PathController : MonoBehaviour
                                 atEnd = false;
                         }
                     }
-
                     Vector3 target = patrolPoints[currentPoint].position - transform.position;
-
                     movementDirection = Quaternion.RotateTowards(Quaternion.LookRotation(movementDirection), Quaternion.LookRotation(target), Time.deltaTime * 400.0f) * Vector3.forward;
-
-                    transform.position += movementDirection * Time.deltaTime * moveSpeed;
-
+                    transform.position += movementDirection * Time.deltaTime * movementSpeed;
                     transform.LookAt(movementDirection + transform.position);
                 }
             }
