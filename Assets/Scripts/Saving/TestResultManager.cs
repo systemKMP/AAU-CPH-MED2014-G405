@@ -32,16 +32,18 @@ public class TestResultManager : MonoBehaviour {
         currentRoomTime += Time.deltaTime;
 	}
 
+    /// <summary>
+    /// Saves the collected test data
+    /// </summary>
     void SaveResult()
     {
-
+        //Setup of the result data
         TestResultData trd = new TestResultData();
         trd.hrtfTest = GameManager.instance.hrtfMode;
-
         trd.testDataList = savingResult;
 
-        System.IO.Directory.CreateDirectory(Application.dataPath + "/../FinalTestData/");
-        var serializer = new XmlSerializer(typeof(TestResultData));
+        System.IO.Directory.CreateDirectory(Application.dataPath + "/../FinalTestData/");//Creates the foler for saving the test data
+        var serializer = new XmlSerializer(typeof(TestResultData));//Creates a new instance of a serializer for the objects of datatype "TestResutData"
 
         string time = "";
         if (System.DateTime.Now.Hour < 10)
@@ -49,22 +51,20 @@ public class TestResultManager : MonoBehaviour {
             time += "0";
         }
         time += System.DateTime.Now.Hour.ToString();
-
         if (System.DateTime.Now.Minute < 10)
         {
             time += "0";
         }
         time += System.DateTime.Now.Minute.ToString();
-
         if (System.DateTime.Now.Second < 10)
         {
             time += "0";
         }
         time += System.DateTime.Now.Second.ToString();
 
-        var stream = new FileStream(Application.dataPath + "/../FinalTestData" + "/Result" + time + ".xml", FileMode.Create);
-        serializer.Serialize(stream, trd);
-        stream.Close();
+        var stream = new FileStream(Application.dataPath + "/../FinalTestData" + "/Result" + time + ".xml", FileMode.Create);//Opens a file stream to a specified location
+        serializer.Serialize(stream, trd);//write to a specified file
+        stream.Close();//Closes the file stream
     }
 
     public void FailedCurrentRoom()

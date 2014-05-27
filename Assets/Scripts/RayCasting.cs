@@ -5,25 +5,19 @@ public class RayCasting : MonoBehaviour {
 
 	private RaycastHit hit = new RaycastHit();
 	public GameObject character; //raycasted from
-
     public GameObject bullet;
-
     public AudioClip killSound;
-
     public AudioSource secondarySource;
 
 	float rayCastInterval = 0.2f;
 	float rayCastTimer;
-
 	int raycastTargets = (1<<8) | (1<<9 | 1<<10); //layer nr 8 = door, layer nr 9 = wall, 10 = player
 
-	// Use this for initialization
 	void Start () {
         if(character == null)
             Debug.LogWarning("No player attached");
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		Vector3 direction = character.transform.position - transform.position;
 

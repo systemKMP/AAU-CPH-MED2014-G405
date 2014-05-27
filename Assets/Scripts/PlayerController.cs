@@ -1,30 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Controls the core functionalities for the players character
+/// </summary>
 public class PlayerController : MonoBehaviour {
 
     public GameObject spawnObject;
     private SpawnPointController currentSpawnPoint;
-
     public CharacterController characterController;
     public MouseLook mouseLook;
     public CharacterMotor characterMotor;
     public FPSInputController fpsInputController;
-
     public CapsuleCollider capsuleCollider;
-
     public bool isDead;
-
     private float deathTimer;
     private float respawnTime = 4.0f;
 
-	// Use this for initialization
 	void Start () {
         rigidbody.isKinematic = true;
         isDead = false;
 	}
 	
-	// Update is called once per frame
 	void Update () {
         if (isDead)
         {
@@ -53,10 +50,13 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Takes care of approprate actions for killing the player
+    /// </summary>
+    /// <param name="pos">position of the enemy that killed the player</param>
     public void Kill(Vector3 pos)
     {
         TestResultManager.instance.FailedCurrentRoom();
-
         isDead = true;
         deathTimer = respawnTime;
 
@@ -72,10 +72,12 @@ public class PlayerController : MonoBehaviour {
         rigidbody.AddForce((transform.position - pos).normalized * 20.0f);
     }
 
+    /// <summary>
+    /// Respawn the players character
+    /// </summary>
     private void Respawn()
     {
         isDead = false;
-        
         characterController.enabled = true;
         fpsInputController.enabled = true;
         characterMotor.enabled = true;

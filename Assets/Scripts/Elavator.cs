@@ -1,19 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Controls the elevator
+/// </summary>
 public class Elavator : MonoBehaviour {
 
     public bool finished = false;
     public bool isRunning = false;
-
     public Transform targetPos;
-
     private float stateTransitionDist = 0.05f;
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -26,9 +22,11 @@ public class Elavator : MonoBehaviour {
                 finished = true;
             }
         }
-
     }
 
+    /// <summary>
+    /// Activates the lift of the elevator
+    /// </summary>
     public void ActivateLift()
     {
         if (!finished)

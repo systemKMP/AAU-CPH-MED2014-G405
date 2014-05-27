@@ -33,7 +33,6 @@ public class DoorController : MonoBehaviour
         {
             openPos = transform.position;
         }
-
     }
 
     void Update()
@@ -45,7 +44,6 @@ public class DoorController : MonoBehaviour
             {
                 state = DoorState.Open;
             }
-
         }
         else if (state == DoorState.Closing)
         {
@@ -55,9 +53,11 @@ public class DoorController : MonoBehaviour
                 state = DoorState.Closed;
             }
         }
-
     }
 
+    /// <summary>
+    /// Does the appropriate doors action
+    /// </summary>
     public void ActivateDoor()
     {
         if (!permaClosed)
@@ -80,6 +80,9 @@ public class DoorController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Locks and closes the door
+    /// </summary>
     public void PermanentClose()
     {
         permaClosed = true;
@@ -91,6 +94,9 @@ public class DoorController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Instantly closes the door
+    /// </summary>
     public void InstantClose()
     {
         transform.position = closedPos;

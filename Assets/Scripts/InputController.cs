@@ -9,7 +9,6 @@ public class InputController : MonoBehaviour
 
     private int doorTag = 1 << 8;
 
-    // Use this for initialization
     void Start()
     {
         Screen.lockCursor = true;
@@ -21,10 +20,9 @@ public class InputController : MonoBehaviour
         Screen.lockCursor = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        RaycastHit ray;
+        RaycastHit ray; //Check if the door is ahead of the player
         if (Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out ray, 2.0f, doorTag))
         {
             DoorController dc = ray.transform.gameObject.GetComponent<DoorController>();
@@ -47,12 +45,10 @@ public class InputController : MonoBehaviour
             {
                 showDoorToolpit = false;
             }
-            
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                dc.ActivateDoor();
-            }
+    if (Input.GetKeyDown(KeyCode.E))
+    {//Acivate the appropriate action to the door
+        dc.ActivateDoor();
+    }
         }
         else
         {
@@ -63,7 +59,7 @@ public class InputController : MonoBehaviour
     void OnGUI()
     {
         if (showDoorToolpit)
-        {
+        {//Shows the tooltip
             GUI.Label(new Rect(Screen.width / 2 - 80.0f, Screen.height / 1.5f, 160.0f, 40.0f), doorTooltipText); 
         }
     }

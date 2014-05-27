@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="64bba284-71cf-4ed9-a7dd-a93b5d751f94"
+  name="TBE_3DCore"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="b0efae4a-b480-41ff-add5-6f69f1d0b5c8"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DTBE_3DCore"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="ae814ea6-ca7a-4f77-b37b-316fbf748137"
+        name="TBE_Source"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="75fb64ad-baae-43b9-b266-2a4a6a7c2a67"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FD:%2Fprg%2FUnityPr%2FAAU-CPH-MED2014-G405%2FAssets%2FTBE_3Dception%2FCore%2FTBE_3DCore.dll Namespace%3DTBE_3DCore Type%3DTBE_Source"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="eb7be531-6e85-42c6-bf53-3be8731b40e6"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d7159352-e659-4fe0-a49f-61af716ed7a9">
+                <propertyInstance
+                  Id="cdb2e0a2-8baa-4493-82b5-abf79e39225f"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2e7ad360-ad2a-44d1-bc5c-065ed53e484f">
+                <propertyInstance
+                  Id="9ece9d70-b2be-48c5-8be9-2b3cd81c9f0f"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2ecf3c73-28d0-462e-af6f-be64563582b7">
+                <propertyInstance
+                  Id="068ea4d7-77b7-4515-b10f-d4299392dddf"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0e6481fe-6b8c-48af-a52c-820737130683">
+                <propertyInstance
+                  Id="940dd933-411f-4def-94de-46773f8b4008"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="efa6df25-a804-4d76-bb68-18b0fb5144b2">
+                <propertyInstance
+                  Id="ac91e1c2-f6a4-4a47-bfde-a1d317d5a9ef"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="5e1ef4db-54a7-480d-b63f-51752b6f574d"
+            isSubstitutable="false">
+            <classMoniker
+              Id="916e22c2-0ad3-49dc-bb58-0651e05cdfd3"
+              LastKnownName="MonoBehaviour"
+              LastKnownLocation="Package_1451.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
