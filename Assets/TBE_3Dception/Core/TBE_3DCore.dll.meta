@@ -4,6 +4,6 @@ MonoAssemblyImporter:
   serializedVersion: 1
   iconMap: {}
   executionOrder:
-    TBE_3DCore.TBE_GlobalListener: -100
-    TBE_3DCore.TBE_RoomProperties: -50
+    TBE_3DCore.TBE_GlobalListener: -200
+    TBE_3DCore.TBE_RoomProperties: -150
   userData: 
